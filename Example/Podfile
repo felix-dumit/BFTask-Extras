@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'BFTask-Extras', :exclusive => true do
+  pod "BFTask-Extras", :path => "../"
+end
+
+target 'Tests', :exclusive => true do
+  pod "BFTask-Extras", :path => "../"
+
+  pod 'Specta'
+  pod 'Expecta'
+end
