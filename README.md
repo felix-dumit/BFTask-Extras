@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/cocoapods/l/BFTask-Extras.svg?style=flat)](http://cocoapods.org/pods/BFTask-Extras)
 [![Platform](https://img.shields.io/cocoapods/p/BFTask-Extras.svg?style=flat)](http://cocoapods.org/pods/BFTask-Extras)
 
-A collection of useful extras to make working with BFTaks more pleasent.
+A collection of useful extras to make working with BFTaks more pleasant.
 
 ##BFTaskImageView
 An UIImageView subclass that allows you to set the image based on a task. When assigning the task it will execute and on completion update the image content.
