@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController id="vXZ-lx-hvc" customClass="FSDViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
+                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cmP-FY-AhE" customClass="BFTaskImageView">
+                                <rect key="frame" x="137.5" y="40" width="173.5" height="173.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="cmP-FY-AhE" secondAttribute="height" multiplier="1:1" id="GuA-c6-XbO"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IOq-8E-8yS" customClass="BFTaskImageView">
+                                <rect key="frame" x="137.5" y="223" width="173.5" height="173"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="IOq-8E-8yS" secondAttribute="height" multiplier="1:1" id="EXq-DI-P7a"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Image 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ys3-2v-UbD">
+                                <rect key="frame" x="26" y="116" width="91.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Image 2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QTp-C4-Qaq">
+                                <rect key="frame" x="26" y="300" width="91.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Image Race" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khX-U3-7vh">
+                                <rect key="frame" x="26" y="483" width="91.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="d32-b6-w6r" customClass="BFTaskImageView">
+                                <rect key="frame" x="137" y="406" width="173.5" height="173.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="d32-b6-w6r" secondAttribute="height" multiplier="1:1" id="wpL-HS-BJP"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cmP-FY-AhE" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="20" id="3Bn-Qk-IDh"/>
+                            <constraint firstItem="cmP-FY-AhE" firstAttribute="centerY" secondItem="ys3-2v-UbD" secondAttribute="centerY" id="68x-mt-zje"/>
+                            <constraint firstItem="d32-b6-w6r" firstAttribute="centerY" secondItem="khX-U3-7vh" secondAttribute="centerY" id="I0U-BE-NZG"/>
+                            <constraint firstItem="cmP-FY-AhE" firstAttribute="leading" secondItem="IOq-8E-8yS" secondAttribute="leading" id="RTX-JG-0Wf"/>
+                            <constraint firstItem="IOq-8E-8yS" firstAttribute="centerY" secondItem="QTp-C4-Qaq" secondAttribute="centerY" id="ThU-yw-gDt"/>
+                            <constraint firstItem="d32-b6-w6r" firstAttribute="top" secondItem="IOq-8E-8yS" secondAttribute="bottom" constant="10" id="Ts6-rW-HbN"/>
+                            <constraint firstItem="d32-b6-w6r" firstAttribute="leading" secondItem="IOq-8E-8yS" secondAttribute="leading" id="V9g-Wz-Oby"/>
+                            <constraint firstItem="QTp-C4-Qaq" firstAttribute="leading" secondItem="khX-U3-7vh" secondAttribute="leading" id="Vet-bc-tyE"/>
+                            <constraint firstItem="ys3-2v-UbD" firstAttribute="leading" secondItem="QTp-C4-Qaq" secondAttribute="leading" id="Zcb-6D-Jvx"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="d32-b6-w6r" secondAttribute="bottom" constant="20" id="cKT-e4-l9Z"/>
+                            <constraint firstItem="d32-b6-w6r" firstAttribute="width" secondItem="d32-b6-w6r" secondAttribute="height" multiplier="1:1" id="dvW-BX-xbz"/>
+                            <constraint firstItem="QTp-C4-Qaq" firstAttribute="width" secondItem="khX-U3-7vh" secondAttribute="width" id="iBe-Nx-ptn"/>
+                            <constraint firstItem="cmP-FY-AhE" firstAttribute="leading" secondItem="ys3-2v-UbD" secondAttribute="trailing" constant="20" id="isB-op-4cE"/>
+                            <constraint firstItem="d32-b6-w6r" firstAttribute="width" secondItem="d32-b6-w6r" secondAttribute="height" multiplier="1:1" id="kiL-Cc-STe"/>
+                            <constraint firstItem="cmP-FY-AhE" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="80" id="lbe-zP-yls"/>
+                            <constraint firstItem="IOq-8E-8yS" firstAttribute="top" secondItem="cmP-FY-AhE" secondAttribute="bottom" constant="10" id="mJf-Li-PH6"/>
+                            <constraint firstItem="ys3-2v-UbD" firstAttribute="width" secondItem="QTp-C4-Qaq" secondAttribute="width" id="na0-9u-v1r"/>
+                            <constraint firstItem="IOq-8E-8yS" firstAttribute="width" secondItem="IOq-8E-8yS" secondAttribute="height" multiplier="1:1" id="qbF-Fp-RpT"/>
+                            <constraint firstItem="ys3-2v-UbD" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="10" id="uB0-fK-Mn8"/>
+                            <constraint firstItem="IOq-8E-8yS" firstAttribute="height" secondItem="d32-b6-w6r" secondAttribute="height" id="xTr-KJ-1Wc"/>
+                            <constraint firstItem="cmP-FY-AhE" firstAttribute="height" secondItem="IOq-8E-8yS" secondAttribute="height" id="zLS-bt-Tve"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="lbe-zP-yls"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="imageView1" destination="cmP-FY-AhE" id="fVc-qU-hpk"/>
+                        <outlet property="imageView2" destination="IOq-8E-8yS" id="LUJ-zO-rus"/>
+                        <outlet property="imageView3" destination="d32-b6-w6r" id="yep-O7-aeO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="571" y="247"/>
+        </scene>
+    </scenes>
+</document>

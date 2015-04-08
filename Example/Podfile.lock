@@ -1,0 +1,23 @@
+PODS:
+  - BFTask-Extras (0.1.0):
+    - Bolts
+  - Bolts (1.1.4)
+  - Expecta (0.3.2)
+  - Specta (0.5.0)
+
+DEPENDENCIES:
+  - BFTask-Extras (from `../`)
+  - Expecta
+  - Specta
+
+EXTERNAL SOURCES:
+  BFTask-Extras:
+    :path: ../
+
+SPEC CHECKSUMS:
+  BFTask-Extras: 6418b5878a556b3dbf8df78aadde68657e8b92ab
+  Bolts: f8e2f94edbf9fec7bb8de5ecaaa3aa6b7de6f64e
+  Expecta: 8c507baf13211207b1e9d0a741480600e6b4ed15
+  Specta: eb90708ed77569bbda089f8ead10bb99b8e9489e
+
+COCOAPODS: 0.36.3
