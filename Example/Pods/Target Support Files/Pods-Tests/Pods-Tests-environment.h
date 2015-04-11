@@ -10,7 +10,7 @@
 #define COCOAPODS_POD_AVAILABLE_BFTask_Extras
 #define COCOAPODS_VERSION_MAJOR_BFTask_Extras 0
 #define COCOAPODS_VERSION_MINOR_BFTask_Extras 1
-#define COCOAPODS_VERSION_PATCH_BFTask_Extras 0
+#define COCOAPODS_VERSION_PATCH_BFTask_Extras 2
 
 // Bolts
 #define COCOAPODS_POD_AVAILABLE_Bolts
@@ -21,8 +21,8 @@
 // Expecta
 #define COCOAPODS_POD_AVAILABLE_Expecta
 #define COCOAPODS_VERSION_MAJOR_Expecta 0
-#define COCOAPODS_VERSION_MINOR_Expecta 3
-#define COCOAPODS_VERSION_PATCH_Expecta 2
+#define COCOAPODS_VERSION_MINOR_Expecta 4
+#define COCOAPODS_VERSION_PATCH_Expecta 0
 
 // Specta
 #define COCOAPODS_POD_AVAILABLE_Specta

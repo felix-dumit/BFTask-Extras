@@ -8,6 +8,7 @@
 
 #import "FSDViewController.h"
 #import <BFTask-Extras.h>
+#import <BFTask+PromiseLike.h>
 
 @interface FSDViewController ()
 @property (weak, nonatomic) IBOutlet BFTaskImageView *imageView1;
@@ -26,9 +27,22 @@
     self.imageView3.image = [UIImage imageNamed:@"loading"];
     
     
+    
     [self loadImage1];
     [self loadImage2];
     [self loadImage3];
+    
+    [BFTask taskWithDelay:1000].then ( ^id (BFTask *task) {
+        return [BFTask cancelledTask];
+    }).then ( ^id (BFTask *task) {
+        NSLog(@"then method");
+        return nil;
+    }).catchOnMain ( ^id (NSError *error) {
+        NSLog(@"catch method");
+        return nil;
+    }).finally ( ^id (BFTask *task) {
+        return nil;
+    });
 }
 
 - (BFTask *)taskForDownloadingSampleImage {
