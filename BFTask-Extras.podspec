@@ -9,13 +9,14 @@
 
 Pod::Spec.new do |s|
   s.name             = "BFTask-Extras"
-  s.version          = "0.1.2"
+  s.version          = "0.2.0"
   s.summary          = "A collection of useful extras to make working with BFTasks more pleasant."
   s.description      = <<-DESC
 - Create tasks with expiration
--Create a race between tasks
+- Create a race between tasks
 - Use tasks to set imageViews
 - Use a result block for faster type casting
+- Add promise like blocks
                        DESC
   s.homepage         = "https://github.com/felix-dumit/BFTask-Extras"
   s.license          = 'MIT'
