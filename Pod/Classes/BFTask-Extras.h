@@ -13,6 +13,6 @@
 #import "BFTask+Result.h"
 #import "BFTask+Timeout.h"
 #import "BFTaskImageView.h"
-
+#import <BFTask+PromiseLike.h>
 
 #endif

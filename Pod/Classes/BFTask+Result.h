@@ -6,14 +6,10 @@
 //  Copyright (c) 2015 Umwho. All rights reserved.
 //
 
+#import "BFTask-blocks.h"
 #import <Bolts/Bolts.h>
 
 @interface BFTask (Result)
-
-typedef id (^BFResultBlock)(id result, NSError *error);
-typedef id (^BFSuccessResultBlock)(id result);
-
-
 
 - (instancetype)continueWithResultBlock:(BFResultBlock)block;
 
