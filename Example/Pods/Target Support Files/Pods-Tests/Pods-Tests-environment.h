@@ -9,8 +9,8 @@
 // BFTask-Extras
 #define COCOAPODS_POD_AVAILABLE_BFTask_Extras
 #define COCOAPODS_VERSION_MAJOR_BFTask_Extras 0
-#define COCOAPODS_VERSION_MINOR_BFTask_Extras 1
-#define COCOAPODS_VERSION_PATCH_BFTask_Extras 2
+#define COCOAPODS_VERSION_MINOR_BFTask_Extras 2
+#define COCOAPODS_VERSION_PATCH_BFTask_Extras 1
 
 // Bolts
 #define COCOAPODS_POD_AVAILABLE_Bolts

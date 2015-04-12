@@ -38,11 +38,11 @@
 
 - (BFTask *)thenWithExecutor:(BFExecutor *)executor withBlock:(BFSuccessResultBlock)block {
     return [self continueWithExecutor:executor withBlock: ^id (BFTask *task) {
-        if ([task error] != nil || [task exception] != nil || [task isCancelled]) {
+        if ([task isFaulted] || [task isCancelled]) {
             return task;
         }
         else {
-            return block(task.result);
+            return block(task.result ? : nil);
         }
     }];
 }
@@ -65,15 +65,7 @@
 
 - (BFTask *)finallyWithExecutor:(BFExecutor *)executor withBlock:(BFPFinallyBlock)block {
     return [self continueWithExecutor:executor withBlock: ^id (BFTask *task) {
-        BFTask *resultTask = block(task);
-        if (resultTask != nil) {
-            return [resultTask continueWithBlock: ^id (BFTask *task2) {
-                return task;
-            }];
-        }
-        else {
-            return task;
-        }
+        return block(task) ? : task;
     }];
 }
 

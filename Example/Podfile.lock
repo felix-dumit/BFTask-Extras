@@ -1,13 +1,17 @@
 PODS:
-  - BFTask-Extras (0.1.2):
+  - BFTask-Extras (0.2.1):
     - Bolts
   - Bolts (1.1.4)
   - Expecta (0.4.0)
+  - SDWebImage (3.7.2):
+    - SDWebImage/Core (= 3.7.2)
+  - SDWebImage/Core (3.7.2)
   - Specta (0.5.0)
 
 DEPENDENCIES:
   - BFTask-Extras (from `../`)
   - Expecta
+  - SDWebImage
   - Specta
 
 EXTERNAL SOURCES:
@@ -15,9 +19,10 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  BFTask-Extras: 6daa80a921995e210be8edd446d4d0a6b7aefa7f
+  BFTask-Extras: 12042e77464f5c690f55c5622cf51d9a1ca5025f
   Bolts: f8e2f94edbf9fec7bb8de5ecaaa3aa6b7de6f64e
   Expecta: 392a6b5bfb9f4097e47dd8064d9b732079490332
+  SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
   Specta: eb90708ed77569bbda089f8ead10bb99b8e9489e
 
 COCOAPODS: 0.36.3

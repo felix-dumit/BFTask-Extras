@@ -33,8 +33,8 @@
     [self loadImage3];
     
     [BFTask taskWithDelay:1000].then ( ^id (BFTask *task) {
-        return [BFTask cancelledTask];
-    }).then ( ^id (BFTask *task) {
+        return [BFTask taskWithResult:@{@"bob": @10}];
+    }).then ( ^id (NSDictionary *task) {
         NSLog(@"then method");
         return nil;
     }).catchOnMain ( ^id (NSError *error) {
