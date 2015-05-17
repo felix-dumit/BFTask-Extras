@@ -16,8 +16,7 @@
 
 - (instancetype)continueWithExecutor:(BFExecutor *)executor withResultBlock:(BFResultBlock)block {
     return [self continueWithExecutor:executor withBlock: ^id (BFTask *task) {
-        block(task.result, task.error);
-        return task;
+        return block(task.result, task.error);
     }];
 }
 
@@ -27,8 +26,7 @@
 
 - (instancetype)continueWithExecutor:(BFExecutor *)executor withSuccessResultBlock:(BFSuccessResultBlock)block {
     return [self continueWithExecutor:executor withSuccessBlock: ^id (BFTask *task) {
-        block(task.result);
-        return task;
+        return block(task.result);
     }];
 }
 
