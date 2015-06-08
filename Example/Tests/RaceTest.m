@@ -68,6 +68,7 @@ describe(@"it will not complete after the first cancel", ^{
     __block BFTask *task1;
     __block BFTask *task2;
     __block BFTask *task3;
+    __block BFTask *task4;
     
     beforeEach ( ^{
         task1 = [[BFTask taskWithDelay:1000] continueWithBlock: ^id (BFTask *task) {
@@ -78,8 +79,12 @@ describe(@"it will not complete after the first cancel", ^{
             return @"result2";
         }];
         
-        task3 = [[BFTask taskWithDelay:1500] continueWithBlock: ^id (BFTask *task) {
+        task3 = [[BFTask taskWithDelay:2000] continueWithBlock: ^id (BFTask *task) {
             return [BFTask cancelledTask];
+        }];
+        
+        task4 = [[BFTask taskWithDelay:2000] continueWithBlock: ^id (BFTask *task) {
+            return @"result4";
         }];
     });
     
@@ -99,6 +104,17 @@ describe(@"it will not complete after the first cancel", ^{
             [[BFTask raceForTasks:@[task1, task3]] continueWithBlock: ^id (BFTask *task) {
                 expect(task.result).to.beNil();
                 expect(task.cancelled).to.beTruthy();
+                done();
+                return nil;
+            }];
+        });
+    });
+    
+    it(@"will complete the first task if at the same time", ^{
+        waitUntil ( ^(DoneCallback done) {
+            [[BFTask raceForTasks:@[task2, task4]] continueWithBlock: ^id (BFTask *task) {
+                expect(task.result).to.equal(@"result2");
+                expect(task.cancelled).to.beFalsy();
                 done();
                 return nil;
             }];
