@@ -10,22 +10,27 @@
 
 @implementation BFTaskCompletionSource (Task)
 
-- (void)setResultBasedOnTask:(BFTask *)taskk {
+- (void)setResultBasedOnTask:(BFTask *)taskk includingCancel:(BOOL)includeCancel {
     [taskk continueWithBlock: ^id (BFTask *task) {
         if (task.error) {
             [self trySetError:task.error];
         }
-        else if (task.isCancelled) {
-            [self trySetCancelled];
-        }
         else if (task.exception) {
             [self trySetException:task.exception];
         }
-        else {
+        else if(task.isCancelled){
+            if(includeCancel){
+                [self trySetCancelled];
+            }
+        } else {
             [self trySetResult:task.result];
         }
         return task;
     }];
+}
+
+- (void)setResultBasedOnTask:(BFTask *)taskk {
+    [self setResultBasedOnTask:taskk includingCancel:YES];
 }
 
 @end

@@ -15,8 +15,16 @@
     BFTaskCompletionSource *tsk = [BFTaskCompletionSource taskCompletionSource];
     
     for (BFTask *task in tasks) {
-        [tsk setResultBasedOnTask:task];
+        [tsk setResultBasedOnTask:task includingCancel:NO];
     }
+    
+    // will be called if all tasks cancelled
+    [[BFTask taskForCompletionOfAllTasks:tasks] continueWithBlock:^id(BFTask *task) {
+        [tsk trySetCancelled];
+        return nil;
+    }];
+    
+    
     return tsk.task;
 }
 

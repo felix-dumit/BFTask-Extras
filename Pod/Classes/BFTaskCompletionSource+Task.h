@@ -11,6 +11,7 @@
 
 @interface BFTaskCompletionSource (Task)
 
+- (void)setResultBasedOnTask:(BFTask *)taskk includingCancel:(BOOL)includeCancel;
 - (void)setResultBasedOnTask:(BFTask *)taskk;
 
 @end

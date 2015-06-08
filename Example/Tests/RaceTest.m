@@ -64,9 +64,10 @@ describe(@"it will complete after the first error", ^{
     });
 });
 
-describe(@"it will complete after the first cancel", ^{
+describe(@"it will not complete after the first cancel", ^{
     __block BFTask *task1;
     __block BFTask *task2;
+    __block BFTask *task3;
     
     beforeEach ( ^{
         task1 = [[BFTask taskWithDelay:1000] continueWithBlock: ^id (BFTask *task) {
@@ -76,11 +77,26 @@ describe(@"it will complete after the first cancel", ^{
         task2 = [[BFTask taskWithDelay:2000] continueWithBlock: ^id (BFTask *task) {
             return @"result2";
         }];
+        
+        task3 = [[BFTask taskWithDelay:1500] continueWithBlock: ^id (BFTask *task) {
+            return [BFTask cancelledTask];
+        }];
     });
     
-    it(@"will cancel after the first cancel", ^{
+    it(@"will not cancel after the first cancel", ^{
         waitUntil ( ^(DoneCallback done) {
             [[BFTask raceForTasks:@[task1, task2]] continueWithBlock: ^id (BFTask *task) {
+                expect(task.result).to.equal(@"result2");
+                expect(task.cancelled).to.beFalsy();
+                done();
+                return nil;
+            }];
+        });
+    });
+    
+    it(@"will cancel after all cancel", ^{
+        waitUntil ( ^(DoneCallback done) {
+            [[BFTask raceForTasks:@[task1, task3]] continueWithBlock: ^id (BFTask *task) {
                 expect(task.result).to.beNil();
                 expect(task.cancelled).to.beTruthy();
                 done();
@@ -89,5 +105,8 @@ describe(@"it will complete after the first cancel", ^{
         });
     });
 });
+
+
+
 
 SpecEnd
