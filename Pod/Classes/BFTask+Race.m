@@ -19,11 +19,10 @@
     }
     
     // will be called if all tasks cancelled
-    [[BFTask taskForCompletionOfAllTasks:tasks] continueWithBlock:^id(BFTask *task) {
+    [[BFTask taskForCompletionOfAllTasks:tasks] continueWithBlock:^id (BFTask *task) {
         [tsk trySetCancelled];
         return nil;
     }];
-    
     
     return tsk.task;
 }

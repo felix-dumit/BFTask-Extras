@@ -29,31 +29,33 @@ describe(@"task completion", ^{
     
     it(@"it will expire", ^{
         [[BFTask taskWithDelay:3000] continueWithBlock: ^id (BFTask *task) {
-            [tsk setResult:@"result"];
+            [tsk trySetResult:@"result"];
             return nil;
         }];
         waitUntil ( ^(DoneCallback done) {
-            [tsk.task continueWithBlock: ^id (BFTask *task) {
-                expect(task.cancelled).to.beTruthy();
-                expect(task.result).to.beNil();
-                done();
-                return nil;
-            }];
+            [tsk.task
+             continueWithBlock: ^id (BFTask *task) {
+                 expect(task.cancelled).to.beTruthy();
+                 expect(task.result).to.beNil();
+                 done();
+                 return nil;
+             }];
         });
     });
     
     it(@"will not expire", ^{
         [[BFTask taskWithDelay:1000] continueWithBlock: ^id (BFTask *task) {
-            [tsk setResult:@"result"];
+            [tsk trySetResult:@"result"];
             return nil;
         }];
         waitUntil ( ^(DoneCallback done) {
-            [tsk.task continueWithBlock: ^id (BFTask *task) {
-                expect(task.cancelled).to.beFalsy();
-                expect(task.result).to.equal(@"result");
-                done();
-                return nil;
-            }];
+            [tsk.task
+             continueWithBlock: ^id (BFTask *task) {
+                 expect(task.cancelled).to.beFalsy();
+                 expect(task.result).to.equal(@"result");
+                 done();
+                 return nil;
+             }];
         });
     });
 });

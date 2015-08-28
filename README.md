@@ -98,6 +98,19 @@ BFTask* raceTask = [BFTask raceForTasks:@[task1, task2]];
 
 ```
 
+##BFTask+DuringBlock
+An easy way to return a task that executes during a given block. The block is executed in a background queue.
+
+```objc 
+// exaple of task during block;
+[BFTask taskDuringBlock:^id {
+ 	NSURL *url = [NSURL URLWithString:@"x.png"];
+ 	NSData *imageData = [NSData dataWithContentsOfURL:url];
+ 	UIImage *image = [UIImage imageWithData:imageData];
+ 	return image;
+}];
+```
+
 ## Usage
 
 To view an example of all these *tasks* working together, view the sample application.

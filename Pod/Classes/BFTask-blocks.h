@@ -13,6 +13,7 @@
 
 typedef id (^BFResultBlock)(id result, NSError *error);
 typedef id (^BFSuccessResultBlock)(id result);
+typedef id (^BFTaskExecutionBlock)();
 typedef id (^BFErrorResultBlock)(NSError *error);
 typedef BFTask *(^BFPFinallyBlock)(BFTask *task);
 

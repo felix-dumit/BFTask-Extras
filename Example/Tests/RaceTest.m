@@ -109,17 +109,6 @@ describe(@"it will not complete after the first cancel", ^{
             }];
         });
     });
-    
-    it(@"will complete the first task if at the same time", ^{
-        waitUntil ( ^(DoneCallback done) {
-            [[BFTask raceForTasks:@[task2, task4]] continueWithBlock: ^id (BFTask *task) {
-                expect(task.result).to.equal(@"result2");
-                expect(task.cancelled).to.beFalsy();
-                done();
-                return nil;
-            }];
-        });
-    });
 });
 
 
