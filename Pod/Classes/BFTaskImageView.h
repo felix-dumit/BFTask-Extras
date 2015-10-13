@@ -7,9 +7,15 @@
 //
 
 #import <Bolts.h>
+#if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
 
 @interface BFTaskImageView : UIImageView
+#else
+#import <Cocoa/Cocoa.h>
+
+@interface BFTaskImageView : NSImageView
+#endif
 
 @property (strong, nonatomic) BFTask *task;
 
