@@ -21,6 +21,7 @@
     return [BFTask taskWithResult:self.image];
 }
 
+#if TARGET_OS_IPHONE
 - (void)setTask:(BFTask *)task {
     [task continueWithExecutor:[BFExecutor mainThreadExecutor] withSuccessBlock: ^id (BFTask *imageTask) {
         UIImage *img = nil;
@@ -36,5 +37,22 @@
         return img;
     }];
 }
-
+#else
+- (void)setTask:(BFTask *)task {
+    [task continueWithExecutor:[BFExecutor mainThreadExecutor] withSuccessBlock: ^id (BFTask *imageTask) {
+        NSImage *img = nil;
+        if ([imageTask.result isKindOfClass:[NSImage class]]) {
+            img = (NSImage *)imageTask.result;
+        }
+        else if ([imageTask.result isKindOfClass:[NSData class]]) {
+            img = [[NSImage alloc] initWithData: imageTask.result];
+        }
+        if (img) {
+            self.image = img;
+        }
+        return img;
+    }];
+}
+#endif
 @end
+
