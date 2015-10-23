@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Umwho. All rights reserved.
 //
 
-#import <Bolts.h>
+#import "Bolts.h"
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
 

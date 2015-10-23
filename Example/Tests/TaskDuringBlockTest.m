@@ -14,13 +14,14 @@ SpecBegin(TaskDuringBlock)
 describe(@"race successfull tasks", ^{
     id result = @"result";
     id error = [NSError errorWithDomain:@"domain" code:444 userInfo:nil];
+    id exception = [NSException exceptionWithName:@"name" reason:@"reason" userInfo:nil];
     __block BFTask *waitTask = nil;
-    beforeEach ( ^{
+    beforeEach( ^{
         waitTask = [BFTask taskWithDelay:1000];
     });
     
     it(@"will complete with correct result", ^{
-        waitUntil ( ^(DoneCallback done) {
+        waitUntil( ^(DoneCallback done) {
             [[BFTask taskDuringBlock:^id {
                 [waitTask waitUntilFinished];
                 return result;
@@ -33,7 +34,7 @@ describe(@"race successfull tasks", ^{
     });
     
     it(@"will will fail if return error", ^{
-        waitUntil ( ^(DoneCallback done) {
+        waitUntil( ^(DoneCallback done) {
             [[BFTask taskDuringBlock:^id {
                 [waitTask waitUntilFinished];
                 return error;
@@ -47,7 +48,7 @@ describe(@"race successfull tasks", ^{
     });
     
     it(@"will will cancel if return cancelled task", ^{
-        waitUntil ( ^(DoneCallback done) {
+        waitUntil( ^(DoneCallback done) {
             [[BFTask taskDuringBlock:^id {
                 [waitTask waitUntilFinished];
                 return [BFTask cancelledTask];
@@ -61,8 +62,24 @@ describe(@"race successfull tasks", ^{
         });
     });
     
+    it(@"will get exception if returned an exception", ^{
+        waitUntil( ^(DoneCallback done) {
+            [[BFTask taskDuringBlock:^id {
+                [waitTask waitUntilFinished];
+                return [BFTask taskWithException:exception];
+            }] continueWithBlock:^id (BFTask *task) {
+                expect(task.exception).to.equal(exception);
+                expect(task.result).to.beNil();
+                expect(task.error).to.beNil();
+                expect(task.faulted).to.beTruthy();
+                done();
+                return nil;
+            }];
+        });
+    });
+    
     it(@"will will get result if returned task", ^{
-        waitUntil ( ^(DoneCallback done) {
+        waitUntil( ^(DoneCallback done) {
             [[BFTask taskDuringBlock:^id {
                 [waitTask waitUntilFinished];
                 return [BFTask taskWithResult:result];
