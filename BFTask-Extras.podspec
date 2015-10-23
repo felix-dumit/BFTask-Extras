@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "BFTask-Extras"
-  s.version          = "0.2.6"
+  s.version          = "0.2.7"
   s.summary          = "A collection of useful extras to make working with BFTasks more pleasant."
   s.description      = <<-DESC
 - Create tasks with expiration
