@@ -1,11 +1,4 @@
 //
-//  BFTask+PromiseLike.m
-//  Pods
-//
-//  Created by Felix Dumit on 4/11/15.
-//
-//
-//
 // BFTask+PromiseLike.m
 // BFTaskPromise
 //
@@ -33,68 +26,104 @@
 #import <Bolts/BFExecutor.h>
 #import "BFTask+PromiseLike.h"
 
+NSString *const BFPTaskErrorDomain = @"BFPTaskErrorDomain";
+NSString *const BFPUnderlyingExceptionKey = @"BFPUnderlyingException";
 
-@implementation BFTask (PromiseLikeResult)
+@implementation BFTask (PromiseLike)
 
-- (BFTask *)thenWithExecutor:(BFExecutor *)executor withBlock:(BFSuccessResultBlock)block {
-    return [self continueWithExecutor:executor withBlock: ^id (BFTask *task) {
-        if ([task isFaulted] || [task isCancelled]) {
-            return task;
-        }
-        else {
-            return block(task.result ? : nil);
-        }
-    }];
+- (BFTask *)thenWithExecutor:(BFExecutor *)executor withBlock:(BFPSuccessResultBlock)block {
+    return [self continueWithExecutor:executor
+                            withBlock: ^id (BFTask *task) {
+                                if ([task error] != nil || [task exception] != nil || [task isCancelled]) {
+                                    return task;
+                                } else {
+                                    return block(task.result);
+                                }
+                            }];
 }
 
-- (BFTask *)catchWithExecutor:(BFExecutor *)executor withBlock:(BFErrorResultBlock)block {
-    return [self continueWithExecutor:executor withBlock: ^id (BFTask *task) {
-        if (task.error) {
-            return block(task.error);
-        }
-        else if (task.exception) {
-            NSMutableDictionary *dict = [task.exception.userInfo mutableCopy] ? : [NSMutableDictionary dictionary];
-            [dict setObject:task.exception.reason forKey:NSLocalizedDescriptionKey];
-            return block([NSError errorWithDomain:task.exception.name code:998 userInfo:dict]);
-        }
-        else {
-            return task;
-        }
-    }];
+- (BFTask *)catchWithExecutor:(BFExecutor *)executor withBlock:(BFPErrorResultBlock)block {
+    return [self continueWithExecutor:executor
+                            withBlock: ^id (BFTask *task) {
+                                if (task.error) {
+                                    return block(task.error);
+                                } else if (task.exception) {
+                                    NSMutableDictionary *dict = [task.exception.userInfo mutableCopy] ? : [NSMutableDictionary dictionary];
+                                    [dict setObject:task.exception
+                                             forKey:BFPUnderlyingExceptionKey];
+                                    NSString *reason = task.exception.reason;
+                                    
+                                    if (reason != nil) {
+                                        [dict setObject:reason
+                                                 forKey:NSLocalizedDescriptionKey];
+                                    }
+                                    
+                                    return block([NSError errorWithDomain:BFPTaskErrorDomain
+                                                                     code:BFPTaskErrorException
+                                                                 userInfo:dict]);
+                                } else {
+                                    return task;
+                                }
+                            }];
 }
 
 - (BFTask *)finallyWithExecutor:(BFExecutor *)executor withBlock:(BFPFinallyBlock)block {
-    return [self continueWithExecutor:executor withBlock: ^id (BFTask *task) {
-        return block(task) ? : task;
-    }];
+    return [self continueWithExecutor:executor
+                            withBlock: ^id (BFTask *task) {
+                                BFTask *resultTask = block();
+                                
+                                if (resultTask != nil) {
+                                    return resultTask.then( ^id (BFTask *task2) {
+                                        return task;
+                                    });
+                                } else {
+                                    return task;
+                                }
+                            }];
 }
 
-- (BFTask *(^)(BFSuccessResultBlock))then {
-    return ^BFTask *(BFSuccessResultBlock block) {
+- (BFTask *(^)(BFContinuationBlock))continueWith {
+    return ^BFTask *(BFContinuationBlock block) {
+        return [self continueWithExecutor:[BFExecutor defaultExecutor] withBlock:block];
+    };
+}
+
+- (BFTask *(^)(BFPSuccessResultBlock))then {
+    return ^BFTask *(BFPSuccessResultBlock block) {
         return [self thenWithExecutor:[BFExecutor defaultExecutor] withBlock:block];
     };
 }
 
-- (BFTask *(^)(BFErrorResultBlock))catch {
-    return ^BFTask *(BFErrorResultBlock block) {
+- (BFTask *(^)(BFPErrorResultBlock))catch {
+    return ^BFTask *(BFPErrorResultBlock block) {
         return [self catchWithExecutor:[BFExecutor defaultExecutor] withBlock:block];
     };
 }
 
-- (BFTask *(^)(BFPFinallyBlock))finally; {
+- (BFTask *(^)(BFPErrorResultBlock))catchWith {
+    return [self catch];
+}
+
+- (BFTask *(^)(BFPFinallyBlock))finally {
     return ^BFTask *(BFPFinallyBlock block) {
         return [self finallyWithExecutor:[BFExecutor defaultExecutor] withBlock:block];
     };
 }
 
-- (BFTask *(^)(BFExecutor *, BFSuccessResultBlock))thenOn {
-    return ^BFTask *(BFExecutor *executor, BFSuccessResultBlock block) {
+- (BFTask *(^)(BFExecutor *, BFContinuationBlock))continueOn {
+    return ^BFTask *(BFExecutor *executor, BFContinuationBlock block) {
+        return [self continueWithExecutor:executor withBlock:block];
+    };
+}
+
+- (BFTask *(^)(BFExecutor *, BFPSuccessResultBlock))thenOn {
+    return ^BFTask *(BFExecutor *executor, BFPSuccessResultBlock block) {
         return [self thenWithExecutor:executor withBlock:block];
     };
 }
 
-- (BFTask *(^)(BFExecutor *, BFErrorResultBlock))catchOn {
-    return ^BFTask *(BFExecutor *executor, BFErrorResultBlock block) {
+- (BFTask *(^)(BFExecutor *, BFPErrorResultBlock))catchOn {
+    return ^BFTask *(BFExecutor *executor, BFPErrorResultBlock block) {
         return [self catchWithExecutor:executor withBlock:block];
     };
 }
@@ -105,14 +134,20 @@
     };
 }
 
-- (BFTask *(^)(BFSuccessResultBlock))thenOnMain {
-    return ^BFTask *(BFSuccessResultBlock block) {
+- (BFTask *(^)(BFContinuationBlock))continueOnMain {
+    return ^BFTask *(BFContinuationBlock block) {
+        return [self continueWithExecutor:[BFExecutor mainThreadExecutor] withBlock:block];
+    };
+}
+
+- (BFTask *(^)(BFPSuccessResultBlock))thenOnMain {
+    return ^BFTask *(BFPSuccessResultBlock block) {
         return [self thenWithExecutor:[BFExecutor mainThreadExecutor] withBlock:block];
     };
 }
 
-- (BFTask *(^)(BFErrorResultBlock))catchOnMain {
-    return ^BFTask *(BFErrorResultBlock block) {
+- (BFTask *(^)(BFPErrorResultBlock))catchOnMain {
+    return ^BFTask *(BFPErrorResultBlock block) {
         return [self catchWithExecutor:[BFExecutor mainThreadExecutor] withBlock:block];
     };
 }
