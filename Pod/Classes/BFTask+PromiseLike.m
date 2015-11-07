@@ -33,40 +33,51 @@
 #import <Bolts/BFExecutor.h>
 #import "BFTask+PromiseLike.h"
 
+NSString *const BFPTaskErrorDomain = @"BFPTaskErrorDomain";
+NSString *const BFPUnderlyingExceptionKey = @"BFPUnderlyingException";
 
 @implementation BFTask (PromiseLikeResult)
 
 - (BFTask *)thenWithExecutor:(BFExecutor *)executor withBlock:(BFSuccessResultBlock)block {
-    return [self continueWithExecutor:executor withBlock: ^id (BFTask *task) {
-        if ([task isFaulted] || [task isCancelled]) {
-            return task;
-        }
-        else {
-            return block(task.result ? : nil);
-        }
-    }];
+    return [self continueWithExecutor:executor
+                            withBlock: ^id (BFTask *task) {
+                                if ([task isFaulted] || [task isCancelled]) {
+                                    return task;
+                                } else {
+                                    return block(task.result ? : nil);
+                                }
+                            }];
 }
 
 - (BFTask *)catchWithExecutor:(BFExecutor *)executor withBlock:(BFErrorResultBlock)block {
-    return [self continueWithExecutor:executor withBlock: ^id (BFTask *task) {
-        if (task.error) {
-            return block(task.error);
-        }
-        else if (task.exception) {
-            NSMutableDictionary *dict = [task.exception.userInfo mutableCopy] ? : [NSMutableDictionary dictionary];
-            [dict setObject:task.exception.reason forKey:NSLocalizedDescriptionKey];
-            return block([NSError errorWithDomain:task.exception.name code:998 userInfo:dict]);
-        }
-        else {
-            return task;
-        }
-    }];
+    return [self continueWithExecutor:executor
+                            withBlock: ^id (BFTask *task) {
+                                if (task.error) {
+                                    return block(task.error);
+                                } else if (task.exception) {
+                                    NSMutableDictionary *dict = [task.exception.userInfo mutableCopy] ? : [NSMutableDictionary dictionary];
+                                    [dict setObject:task.exception
+                                             forKey:BFPUnderlyingExceptionKey];
+                                    
+                                    if (task.exception.reason) {
+                                        [dict setObject:task.exception.reason
+                                                 forKey:NSLocalizedDescriptionKey];
+                                    }
+                                    
+                                    return block([NSError errorWithDomain:BFPTaskErrorDomain
+                                                                     code:BFPTaskErrorException
+                                                                 userInfo:dict]);
+                                } else {
+                                    return task;
+                                }
+                            }];
 }
 
 - (BFTask *)finallyWithExecutor:(BFExecutor *)executor withBlock:(BFPFinallyBlock)block {
-    return [self continueWithExecutor:executor withBlock: ^id (BFTask *task) {
-        return block(task) ? : task;
-    }];
+    return [self continueWithExecutor:executor
+                            withBlock: ^id (BFTask *task) {
+                                return block(task) ? : task;
+                            }];
 }
 
 - (BFTask *(^)(BFSuccessResultBlock))then {
