@@ -21,7 +21,7 @@ imageView.task = imageTask;
 ##BFTask+Timeout
 Allows you to create tasks that expire after a certain interval. Useful for network operations.
 There are two ways to do this:
-###BFTaskCompletionSource
+####BFTaskCompletionSource
 Create a BFTaskCompletionSource that expires after a set interval:
 
 ```objc
@@ -46,7 +46,7 @@ Now if you continue the task it will either complete or be cancelled after the s
 }];
 
 ```
-###BFTask setTimeout
+####BFTask setTimeout
 A faster way to do the above if you already have a *BFTask* is to use the setTimeout method then procceed with the continue block:
 
 
