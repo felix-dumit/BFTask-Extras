@@ -29,6 +29,7 @@ Create a BFTaskCompletionSource that expires after a set interval:
 BFTaskCompletionSource *tsk = [BFTaskCompletionSource taskCompletionSourceWithExpiration:1];
 
 [self someAsyncMethodWithCompletion:^(id result){
+	// need to use trySetResult here because it could have expired!
 	[tsk trySetResult:result];
 }];
 
@@ -102,7 +103,7 @@ BFTask* raceTask = [BFTask raceForTasks:@[task1, task2]];
 An easy way to return a task that executes during a given block. The block is executed in a background queue.
 
 ```objc 
-// exaple of task during block;
+// example of task during block;
 [BFTask taskDuringBlock:^id {
  	NSURL *url = [NSURL URLWithString:@"x.png"];
  	NSData *imageData = [NSData dataWithContentsOfURL:url];
