@@ -34,6 +34,7 @@ BFTaskCompletionSource *tsk = [BFTaskCompletionSource taskCompletionSourceWithEx
 }];
 
 ```
+
 Now if you continue the task it will either complete or be cancelled after the specified timeout:
 
 ```objc 
@@ -47,6 +48,8 @@ Now if you continue the task it will either complete or be cancelled after the s
 }];
 
 ```
+Be sure to use the `try` methods to set result or error to cover the scenario your original tasks finishes after the timeout.
+
 ####BFTask setTimeout
 A faster way to do the above if you already have a *BFTask* is to use the setTimeout method then procceed with the continue block:
 
@@ -111,6 +114,8 @@ An easy way to return a task that executes during a given block. The block is ex
  	return image;
 }];
 ```
+PS: If you return an `NSError` or `NSException` from the block, the resulting task will fail. 
+You can also return a `BFTask`, in that case the resulting task will resolve based on the result of the returned task.
 
 ## Usage
 
