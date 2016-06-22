@@ -21,7 +21,7 @@ imageView.task = imageTask;
 ##BFTask+Timeout
 Allows you to create tasks that expire after a certain interval. Useful for network operations.
 There are two ways to do this:
-###BFTaskCompletionSource
+####BFTaskCompletionSource
 Create a BFTaskCompletionSource that expires after a set interval:
 
 ```objc
@@ -29,10 +29,12 @@ Create a BFTaskCompletionSource that expires after a set interval:
 BFTaskCompletionSource *tsk = [BFTaskCompletionSource taskCompletionSourceWithExpiration:1];
 
 [self someAsyncMethodWithCompletion:^(id result){
+	// need to use trySetResult here because it could have expired!
 	[tsk trySetResult:result];
 }];
 
 ```
+
 Now if you continue the task it will either complete or be cancelled after the specified timeout:
 
 ```objc 
@@ -46,7 +48,9 @@ Now if you continue the task it will either complete or be cancelled after the s
 }];
 
 ```
-###BFTask setTimeout
+Be sure to use the `try` methods to set result or error to cover the scenario your original tasks finishes after the timeout.
+
+####BFTask setTimeout
 A faster way to do the above if you already have a *BFTask* is to use the setTimeout method then procceed with the continue block:
 
 
@@ -102,7 +106,7 @@ BFTask* raceTask = [BFTask raceForTasks:@[task1, task2]];
 An easy way to return a task that executes during a given block. The block is executed in a background queue.
 
 ```objc 
-// exaple of task during block;
+// example of task during block;
 [BFTask taskDuringBlock:^id {
  	NSURL *url = [NSURL URLWithString:@"x.png"];
  	NSData *imageData = [NSData dataWithContentsOfURL:url];
@@ -110,6 +114,8 @@ An easy way to return a task that executes during a given block. The block is ex
  	return image;
 }];
 ```
+PS: If you return an `NSError` or `NSException` from the block, the resulting task will fail. 
+You can also return a `BFTask`, in that case the resulting task will resolve based on the result of the returned task.
 
 ## Usage
 

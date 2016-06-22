@@ -15,6 +15,6 @@
 #import "BFTaskImageView.h"
 #import "BFTask+DuringBlock.h"
 #import "BFTaskCompletionSource+Task.h"
-#import <BFTask+PromiseLike.h>
+#import "BFTask+PromiseLike.h"
 
 #endif
