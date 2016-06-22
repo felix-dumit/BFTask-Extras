@@ -1,9 +1,9 @@
 PODS:
-  - BFTask-Extras (0.2.5):
+  - BFTask-Extras (1.0.2):
     - Bolts/Tasks
-  - Bolts/Tasks (1.4.0)
-  - Expecta (1.0.3)
-  - Specta (1.0.4)
+  - Bolts/Tasks (1.7.0)
+  - Expecta (1.0.5)
+  - Specta (1.0.5)
 
 DEPENDENCIES:
   - BFTask-Extras (from `../`)
@@ -15,9 +15,11 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  BFTask-Extras: 34a61bf234dd47546837b34b0af06b776d64759f
-  Bolts: 0e9bce58b9b9f5e8a7a4d47b16d2fabec289072b
-  Expecta: 9d1bff6c8b0eeee73a166a2ee898892478927a15
-  Specta: 69bb134672aae190a1379ff91df07dad8dd1f869
+  BFTask-Extras: 98ff0921c62702a8408b7e8d162a3a716a76bf50
+  Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
+  Expecta: e1c022fcd33910b6be89c291d2775b3fe27a89fe
+  Specta: ac94d110b865115fe60ff2c6d7281053c6f8e8a2
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 19cdb0fcbec3ad0c3aea94000c9403e791575786
+
+COCOAPODS: 1.0.1

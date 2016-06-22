@@ -6,7 +6,6 @@
 //
 //
 
-#import "BFTask.h"
 #import "BFTask-blocks.h"
 
 extern NSString *const BFPTaskErrorDomain;

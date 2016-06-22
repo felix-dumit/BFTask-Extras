@@ -7,7 +7,9 @@
 //
 
 #import "BFTask-blocks.h"
-#import <Bolts/Bolts.h>
+#import <Bolts/BFTask.h>
+
+@class BFExecutor;
 
 @interface BFTask (Result)
 

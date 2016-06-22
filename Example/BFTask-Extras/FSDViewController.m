@@ -9,6 +9,12 @@
 #import "FSDViewController.h"
 #import <BFTask-Extras.h>
 
+#define tthen(c, x) \
+then (^ id(c * result) x)
+
+#define ccatch(x) \
+catch (^ id(NSError * error) x)
+
 @interface FSDViewController ()
 @property (weak, nonatomic) IBOutlet BFTaskImageView *imageView1;
 @property (weak, nonatomic) IBOutlet BFTaskImageView *imageView2;
@@ -25,21 +31,35 @@
     self.imageView2.image = [UIImage imageNamed:@"loading"];
     self.imageView3.image = [UIImage imageNamed:@"loading"];
     
-    
-    
     [self loadImage1];
     [self loadImage2];
     [self loadImage3];
     
-    [BFTask taskWithDelay:1000].then ( ^id (BFTask *task) {
+    BFTask *task1 = [BFTask taskWithResult:@"EEE"].tthen(NSString, {
+        return result;
+    }).tthen(NSString, {
+        return [result stringByAppendingString:@"AAA"];
+    });
+    
+    task1.ccatch({
+        return error;
+    });
+    
+    
+    [task1 continueWithBlock:^id (BFTask *task) {
+        NSLog(@"task: %@", task);
+        return nil;
+    }];
+    
+    [BFTask taskWithDelay:1000].then( ^id (BFTask *task) {
         return [BFTask taskWithResult:@{ @"bob": @10 }];
-    }).then ( ^id (NSDictionary *task) {
+    }).then( ^id (NSDictionary *task) {
         NSLog(@"then method");
         return nil;
-    }).catchOnMain ( ^id (NSError *error) {
+    }).catchOnMain( ^id (NSError *error) {
         NSLog(@"catch method");
         return nil;
-    }).finally ( ^id (BFTask *task) {
+    }).finally( ^id (BFTask *task) {
         return nil;
     });
 }

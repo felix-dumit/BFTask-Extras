@@ -7,6 +7,7 @@
 //
 
 #import "BFTask+Result.h"
+#import <Bolts/BFExecutor.h>
 
 @implementation BFTask (Result)
 

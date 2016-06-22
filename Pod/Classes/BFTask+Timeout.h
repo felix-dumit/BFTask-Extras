@@ -6,8 +6,10 @@
 //  Copyright (c) 2015 Umwho. All rights reserved.
 //
 
-#import "Bolts.h"
 #import "BFTaskCompletionSource.h"
+
+@class BFTask;
+@class BFTaskCompletionSource;
 
 @interface BFTaskCompletionSource (Timeout)
 

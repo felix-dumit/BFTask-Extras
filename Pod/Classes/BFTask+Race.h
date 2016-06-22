@@ -6,7 +6,7 @@
 //
 //
 
-#import "Bolts.h"
+#import <Bolts/BFTask.h>
 
 @interface BFTask (Race)
 

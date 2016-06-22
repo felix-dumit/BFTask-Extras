@@ -30,6 +30,7 @@
 // SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+#import <Bolts/BFTask.h>
 #import <Bolts/BFExecutor.h>
 #import "BFTask+PromiseLike.h"
 
