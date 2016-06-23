@@ -7,7 +7,7 @@
 //
 
 #import "BFTask-blocks.h"
-#import <Bolts/BFTask.h>
+#import <Bolts/Bolts.h>
 
 @interface BFTask (DuringBlock)
 

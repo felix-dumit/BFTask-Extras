@@ -48,7 +48,7 @@ describe(@"set image based on tasks", ^{
     it(@"will not set image if failed", ^{
         UIImage *originalImage = [UIImage imageNamed:@"rosie_image"];
         BFTaskImageView *imageView = [[BFTaskImageView alloc] initWithImage:originalImage];
-        task = [BFTask taskWithError:nil];
+        task = [BFTask taskWithError:[NSError errorWithDomain:@"task.test" code:111 userInfo:nil]];
         imageView.task = task;
         waitUntil ( ^(DoneCallback done) {
             [task continueWithBlock: ^id (BFTask *task) {

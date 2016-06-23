@@ -4,7 +4,7 @@ target 'BFTask-Extras' do
   pod "BFTask-Extras", :path => "../"
 
   target 'Tests' do
-    inherit! :search_paths
+    #inherit! :search_paths
 
   	pod 'Specta'
   	pod 'Expecta'
