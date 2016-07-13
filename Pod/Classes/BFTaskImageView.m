@@ -7,6 +7,7 @@
 //
 
 #import "BFTaskImageView.h"
+#import <Bolts/BFExecutor.h>
 
 @implementation BFTaskImageView
 

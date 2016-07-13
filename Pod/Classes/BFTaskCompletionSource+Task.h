@@ -6,7 +6,9 @@
 //
 //
 
-#import <Bolts/Bolts.h>
+#import <Bolts/BFTaskCompletionSource.h>
+
+@class BFTask;
 
 @interface BFTaskCompletionSource (Task)
 
