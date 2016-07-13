@@ -16,9 +16,6 @@
         if (task.error) {
             [self trySetError:task.error];
         }
-        else if (task.exception) {
-            [self trySetException:task.exception];
-        }
         else if(task.isCancelled){
             if(includeCancel){
                 [self trySetCancelled];

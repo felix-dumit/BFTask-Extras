@@ -19,8 +19,6 @@
         
         if ([result isKindOfClass:[NSError class]]) {
             [tsk trySetError:result];
-        } else if ([result isKindOfClass:[NSException class]]) {
-            [tsk trySetException:result];
         } else if ([result isKindOfClass:[BFTask class]]) {
             [tsk setResultBasedOnTask:result
                       includingCancel:YES];
