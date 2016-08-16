@@ -9,6 +9,7 @@
 #ifndef Pods_BFTask_blocks_h
 #define Pods_BFTask_blocks_h
 
+@class NSError;
 @class BFTask;
 
 typedef id (^BFResultBlock)(id result, NSError *error);
