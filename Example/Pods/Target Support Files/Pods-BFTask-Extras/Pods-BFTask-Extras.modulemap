@@ -1,0 +1,6 @@
+framework module Pods_BFTask_Extras {
+  umbrella header "Pods-BFTask-Extras-umbrella.h"
+
+  export *
+  module * { export * }
+}

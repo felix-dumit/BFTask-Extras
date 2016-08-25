@@ -1,0 +1,6 @@
+framework module BFTask_Extras {
+  umbrella header "BFTask-Extras-umbrella.h"
+
+  export *
+  module * { export * }
+}
