@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4F74EF45D5F0AF51CC805054 /* Pods_BFTask_Extras.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6109F5AD0C912353738364A3 /* Pods_BFTask_Extras.framework */; };
-		5D0B6961331AEE12DEB274DB /* libPods-BFTask-Extras-Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B1F013A3B3F3949723AA6DC7 /* libPods-BFTask-Extras-Tests.a */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -67,7 +66,6 @@
 		6E971FEE4C1605AAD2788704 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		6EB3A5B194A3718FEE5B634B /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
 		82D5F5D6641E172C6FE4431A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		B1F013A3B3F3949723AA6DC7 /* libPods-BFTask-Extras-Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BFTask-Extras-Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8A12B11C9467116F8C9B70E /* BFTask-Extras.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "BFTask-Extras.podspec"; path = "../BFTask-Extras.podspec"; sourceTree = "<group>"; };
 		D513D7601AD1F80D0039934B /* TaskResultTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskResultTest.m; sourceTree = "<group>"; };
 		D59EA1FB1B90EE3A00538F02 /* TaskDuringBlockTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskDuringBlockTest.m; sourceTree = "<group>"; };
@@ -98,7 +96,6 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				5D0B6961331AEE12DEB274DB /* libPods-BFTask-Extras-Tests.a in Frameworks */,
 				CBB43962732AD18293A1E968 /* Pods_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,7 +131,6 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				B1F013A3B3F3949723AA6DC7 /* libPods-BFTask-Extras-Tests.a */,
 				6109F5AD0C912353738364A3 /* Pods_BFTask_Extras.framework */,
 				DBECD75B125929F6620A27B2 /* Pods_Tests.framework */,
 			);
@@ -588,6 +584,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BFTask-Extras.app/BFTask-Extras";
@@ -607,6 +604,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BFTask-Extras.app/BFTask-Extras";

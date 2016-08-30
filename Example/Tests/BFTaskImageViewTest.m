@@ -7,9 +7,9 @@
 //
 
 
-#import <Expecta.h>
-#import <Specta.h>
-#import <BFTaskImageView.h>
+#import <Expecta/Expecta.h>
+#import <Specta/Specta.h>
+#import <BFTask_Extras/BFTaskImageView.h>
 
 SpecBegin(TaskImageView)
 

@@ -14,9 +14,9 @@
 //  Copyright (c) 2015 Felix Dumit. All rights reserved.
 //
 
-#import <Expecta.h>
-#import <Specta.h>
-#import <BFTask+Timeout.h>
+#import <Expecta/Expecta.h>
+#import <Specta/Specta.h>
+#import <BFTask_Extras/BFTask+Timeout.h>
 
 SpecBegin(TaskTimeout)
 

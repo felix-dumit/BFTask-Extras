@@ -5,16 +5,15 @@
 //  Created by Felix Dumit on 8/28/15.
 //  Copyright (c) 2015 Felix Dumit. All rights reserved.
 //
-#import <Expecta.h>
-#import <Specta.h>
-#import <BFTask+DuringBlock.h>
+#import <Expecta/Expecta.h>
+#import <Specta/Specta.h>
+#import <BFTask_Extras/BFTask+DuringBlock.h>
 
 SpecBegin(TaskDuringBlock)
 
 describe(@"race successfull tasks", ^{
     id result = @"result";
     id error = [NSError errorWithDomain:@"domain" code:444 userInfo:nil];
-    id exception = [NSException exceptionWithName:@"name" reason:@"reason" userInfo:nil];
     __block BFTask *waitTask = nil;
     beforeEach( ^{
         waitTask = [BFTask taskWithDelay:1000];
@@ -56,22 +55,6 @@ describe(@"race successfull tasks", ^{
                 expect(task.result).to.beNil();
                 expect(task.error).to.beNil();
                 expect(task.cancelled).to.beTruthy();
-                done();
-                return nil;
-            }];
-        });
-    });
-    
-    it(@"will get exception if returned an exception", ^{
-        waitUntil( ^(DoneCallback done) {
-            [[BFTask taskDuringBlock:^id {
-                [waitTask waitUntilFinished];
-                return [BFTask taskWithException:exception];
-            }] continueWithBlock:^id (BFTask *task) {
-                expect(task.exception).to.equal(exception);
-                expect(task.result).to.beNil();
-                expect(task.error).to.beNil();
-                expect(task.faulted).to.beTruthy();
                 done();
                 return nil;
             }];
