@@ -6,17 +6,26 @@
 //
 //
 
-#ifndef Pods_BFTask_blocks_h
-#define Pods_BFTask_blocks_h
 
+#import <Bolts/BFTask.h>
 @class NSError;
-@class BFTask;
 
-typedef id (^BFResultBlock)(id result, NSError *error);
-typedef id (^BFSuccessResultBlock)(id result);
-typedef id (^BFTaskExecutionBlock)();
-typedef id (^BFErrorResultBlock)(NSError *error);
-typedef BFTask *(^BFPFinallyBlock)(BFTask *task);
+NS_ASSUME_NONNULL_BEGIN
 
+@interface BFTask<__covariant ResultType>(Blocks)
 
-#endif
+typedef __nullable id(^BFResultBlock)(ResultType result, NSError *error);
+typedef __nullable id (^BFSuccessResultBlock)(ResultType result);
+typedef __nullable id (^BFTaskExecutionBlock)();
+typedef __nullable id (^BFErrorResultBlock)(NSError *error);
+typedef  BFTask * __nullable(^BFPFinallyBlock)(BFTask<ResultType> *task);
+
+@end
+
+NS_ASSUME_NONNULL_END
+
+//typedef id (^BFResultBlock)(id result, NSError *error);
+//typedef id (^BFSuccessResultBlock)(id result);
+//typedef id (^BFTaskExecutionBlock)();
+//typedef id (^BFErrorResultBlock)(NSError *error);
+//typedef BFTask *(^BFPFinallyBlock)(BFTask *task);

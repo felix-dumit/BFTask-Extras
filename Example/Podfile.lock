@@ -1,5 +1,5 @@
 PODS:
-  - BFTask-Extras (1.0.5):
+  - BFTask-Extras (1.0.6):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
   - Expecta (1.0.5)
@@ -15,7 +15,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  BFTask-Extras: 8618c848c1caf16ca69e9fb73a3c368035bbb86f
+  BFTask-Extras: a1305fd793c808f85c6de29ccb2362e466c06304
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Expecta: e1c022fcd33910b6be89c291d2775b3fe27a89fe
   Specta: ac94d110b865115fe60ff2c6d7281053c6f8e8a2
