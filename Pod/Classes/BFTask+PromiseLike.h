@@ -8,11 +8,6 @@
 
 #import "BFTask-blocks.h"
 
-extern NSString *const BFPTaskErrorDomain;
-extern NSString *const BFPUnderlyingExceptionKey;
-typedef NS_ENUM (NSInteger, BFPTaskErrorCode) {
-    BFPTaskErrorException   = 1,
-};
 
 @interface BFTask (PromiseLikeResult)
 
