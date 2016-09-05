@@ -55,7 +55,8 @@ NSInteger const kBFTimeoutError = 80175555;
 @implementation NSError (BFCancel)
 
 +(NSError *)boltsTimeoutError {
-    return [NSError errorWithDomain:BFTaskErrorDomain code:kBFTimeoutError userInfo:nil];
+    NSDictionary* userInfo = @{ NSLocalizedDescriptionKey: NSLocalizedString(@"The task timed out", nil) };
+    return [NSError errorWithDomain:BFTaskErrorDomain code:kBFTimeoutError userInfo:userInfo];
 }
 
 @end
