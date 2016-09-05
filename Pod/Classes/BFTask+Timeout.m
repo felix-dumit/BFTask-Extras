@@ -10,12 +10,21 @@
 #import "BFTask+Timeout.h"
 #import "BFTaskCompletionSource+Task.h"
 
+NSInteger const kBFTimeoutError = 80175555;
+
+@interface NSError (BFCancel)
+
++(NSError*)boltsTimeoutError;
+
+@end
+
+
 @implementation BFTaskCompletionSource (Timeout)
 
 + (instancetype)taskCompletionSourceWithExpiration:(NSTimeInterval)timeout {
     BFTaskCompletionSource *taskCompletion = [BFTaskCompletionSource taskCompletionSource];
     [[BFTask taskWithDelay:timeout * 1000] continueWithBlock: ^id (BFTask *task) {
-        [taskCompletion trySetCancelled];
+        [taskCompletion trySetError:[NSError boltsTimeoutError]];
         return nil;
     }];
     return taskCompletion;
@@ -34,6 +43,15 @@
     BFTaskCompletionSource *tsk = [BFTaskCompletionSource taskCompletionSourceWithExpiration:timeout];
     [tsk setResultBasedOnTask:self];
     return tsk.task;
+}
+
+@end
+
+
+@implementation NSError (BFCancel)
+
++(NSError *)boltsTimeoutError {
+    return [NSError errorWithDomain:BFTaskErrorDomain code:kBFTimeoutError userInfo:nil];
 }
 
 @end

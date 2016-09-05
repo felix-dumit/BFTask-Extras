@@ -9,6 +9,10 @@
 #import <Bolts/BFTaskCompletionSource.h>
 #import <Bolts/BFTask.h>
 
+
+extern NSInteger const kBFTimeoutError;
+
+
 @interface BFTaskCompletionSource (Timeout)
 
 /**

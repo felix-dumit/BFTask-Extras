@@ -19,7 +19,7 @@ imageView.task = imageTask;
 ```
 
 ##BFTask+Timeout
-Allows you to create tasks that expire after a certain interval. Useful for network operations.
+Allows you to create tasks that expire after a certain interval. Useful for network operations. The tasks will error with domain=`BFTaskErrorDomain` and code = `kBFTimeoutError`.
 There are two ways to do this:
 ####BFTaskCompletionSource
 Create a BFTaskCompletionSource that expires after a set interval:
@@ -39,11 +39,11 @@ Now if you continue the task it will either complete or be cancelled after the s
 
 ```objc 
 [tsk.task continueWithBlock:^id(BFTask* task){
-	if(task.cancelled){
+	if(task.error.code == kBFTimeoutError){
 		//timed out
 	}
 	else {
-		// proceed as normal with error or result
+		// proceed as normal
 	}
 }];
 
@@ -58,11 +58,11 @@ A faster way to do the above if you already have a *BFTask* is to use the setTim
 BFTask* someTask;
 
 [[someTask setTimeout:20] continueWithBlock: ^id (BFTask *task) {
-        if (task.cancelled) {
+        if (task.error.code == kBFTimeoutError) {
             //timed out
         }
         else {
-        	// proceed as normal with result or error
+        	// proceed as normal
         }
         return nil;
 }];

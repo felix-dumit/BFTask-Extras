@@ -64,7 +64,7 @@
     // task will timeout since loading is 3s and timeout is 1s
     BFTask *imageTask1 = [tsk.task
                           continueWithBlock: ^id (BFTask *task) {
-                              if (task.cancelled) {
+                              if (task.error.code == kBFTimeoutError) {
                                   return [UIImage imageNamed:@"timeout"];
                               }
                               
@@ -79,7 +79,7 @@
 - (void)loadImage2 {
     // wont expire since this is 20s timeout
     BFTask *imageTask2 = [[[self taskForDownloadingSampleImage] setTimeout:20] continueWithBlock: ^id (BFTask *task) {
-        if (task.cancelled) {
+        if (task.error.code == kBFTimeoutError) {
             return [UIImage imageNamed:@"timeout"];
         }
         
@@ -98,7 +98,7 @@
     
     // exaple of task during block;
     BFTask *raceTask2 = [BFTask taskDuringBlock:^id {
-        NSURL *url = [NSURL URLWithString:@"http://international.download.nvidia.com/geforce-com/international/images/assassins-creed-iv-black-flag/assassins-creed-iv-black-flag-pc-screenshot-01.png"];
+        NSURL *url = [NSURL URLWithString:@"https://international.download.nvidia.com/geforce-com/international/images/assassins-creed-iv-black-flag/assassins-creed-iv-black-flag-pc-screenshot-01.png"];
         NSData *imageData = [NSData dataWithContentsOfURL:url];
         UIImage *image = [UIImage imageWithData:imageData];
         return image;

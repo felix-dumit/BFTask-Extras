@@ -35,8 +35,9 @@ describe(@"task completion", ^{
         waitUntil ( ^(DoneCallback done) {
             [tsk.task
              continueWithBlock: ^id (BFTask *task) {
-                 expect(task.cancelled).to.beTruthy();
+                 expect(task.cancelled).to.beFalsy();
                  expect(task.result).to.beNil();
+                 expect(task.error.code).to.equal(kBFTimeoutError);
                  done();
                  return nil;
              }];
@@ -52,6 +53,7 @@ describe(@"task completion", ^{
             [tsk.task
              continueWithBlock: ^id (BFTask *task) {
                  expect(task.cancelled).to.beFalsy();
+                 expect(task.error).to.beNil();
                  expect(task.result).to.equal(@"result");
                  done();
                  return nil;
@@ -73,7 +75,8 @@ describe(@"it will work with set timeout", ^{
     it(@"will expire", ^{
         waitUntil ( ^(DoneCallback done) {
             [[task setTimeout:1] continueWithBlock: ^id (BFTask *task) {
-                expect(task.cancelled).to.beTruthy();
+                expect(task.cancelled).to.beFalsy();
+                expect(task.error.code).to.equal(kBFTimeoutError);
                 expect(task.result).to.beNil();
                 done();
                 return nil;
@@ -85,6 +88,7 @@ describe(@"it will work with set timeout", ^{
         waitUntil ( ^(DoneCallback done) {
             [[task setTimeout:3] continueWithBlock: ^id (BFTask *task) {
                 expect(task.cancelled).to.beFalsy();
+                expect(task.error).to.beFalsy();
                 expect(task.result).to.equal(@"result");
                 done();
                 return nil;
