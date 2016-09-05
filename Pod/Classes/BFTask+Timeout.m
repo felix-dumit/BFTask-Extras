@@ -45,6 +45,10 @@ NSInteger const kBFTimeoutError = 80175555;
     return tsk.task;
 }
 
+-(BOOL)hasTimedOut {
+    return [self.error.domain isEqualToString:BFTaskErrorDomain] && self.error.code == kBFTimeoutError;
+}
+
 @end
 
 

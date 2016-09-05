@@ -64,7 +64,7 @@
     // task will timeout since loading is 3s and timeout is 1s
     BFTask *imageTask1 = [tsk.task
                           continueWithBlock: ^id (BFTask *task) {
-                              if (task.error.code == kBFTimeoutError) {
+                              if (task.hasTimedOut) {
                                   return [UIImage imageNamed:@"timeout"];
                               }
                               
@@ -79,7 +79,7 @@
 - (void)loadImage2 {
     // wont expire since this is 20s timeout
     BFTask *imageTask2 = [[[self taskForDownloadingSampleImage] setTimeout:20] continueWithBlock: ^id (BFTask *task) {
-        if (task.error.code == kBFTimeoutError) {
+        if (task.hasTimedOut) {
             return [UIImage imageNamed:@"timeout"];
         }
         

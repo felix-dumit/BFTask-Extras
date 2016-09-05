@@ -30,6 +30,12 @@ extern NSInteger const kBFTimeoutError;
 @interface BFTask (Timeout)
 
 
+
+/**
+ *   Whether this task has timed out
+*/
+@property (nonatomic, assign, readonly, getter=hasTimedOut) BOOL timedOut;
+
 /**
  *  Sets a timeout for the current task
  *
