@@ -52,17 +52,17 @@
 
 - (void)loadImage1 {
     //will expire after 1s
-    BFTaskCompletionSource *tsk = [BFTaskCompletionSource taskCompletionSourceWithExpiration:1];
+    BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSourceWithExpiration:1];
     
     //example of using the result blocks
     [[self taskForDownloadingSampleImage] continueWithSuccessResultBlock: ^id (UIImage *image) {
         //need to use try method because it could have expired already
-        [tsk trySetResult:image];
+        [tcs trySetResult:image];
         return nil;
     }];
     
     // task will timeout since loading is 3s and timeout is 1s
-    BFTask *imageTask1 = [tsk.task
+    BFTask *imageTask1 = [tcs.task
                           continueWithBlock: ^id (BFTask *task) {
                               if (task.hasTimedOut) {
                                   return [UIImage imageNamed:@"timeout"];

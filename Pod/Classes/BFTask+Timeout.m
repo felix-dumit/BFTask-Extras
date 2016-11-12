@@ -40,9 +40,9 @@ NSInteger const kBFTimeoutError = 80175555;
 }
 
 - (BFTask *)_continueTaskWithTimeout:(NSTimeInterval)timeout {
-    BFTaskCompletionSource *tsk = [BFTaskCompletionSource taskCompletionSourceWithExpiration:timeout];
-    [tsk setResultBasedOnTask:self];
-    return tsk.task;
+    BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSourceWithExpiration:timeout];
+    [tcs setResultBasedOnTask:self];
+    return tcs.task;
 }
 
 -(BOOL)hasTimedOut {
@@ -57,6 +57,14 @@ NSInteger const kBFTimeoutError = 80175555;
 +(NSError *)boltsTimeoutError {
     NSDictionary* userInfo = @{ NSLocalizedDescriptionKey: NSLocalizedString(@"The task timed out", nil) };
     return [NSError errorWithDomain:BFTaskErrorDomain code:kBFTimeoutError userInfo:userInfo];
+}
+
+@end
+
+@implementation NSError (TimeoutError)
+
+-(BOOL)isTimeoutError {
+    return [self isEqual:[NSError boltsTimeoutError]];
 }
 
 @end

@@ -21,23 +21,24 @@
 SpecBegin(TaskTimeout)
 
 describe(@"task completion", ^{
-    __block BFTaskCompletionSource *tsk;
+    __block BFTaskCompletionSource *tcs;
     
     beforeEach ( ^{
-        tsk = [BFTaskCompletionSource taskCompletionSourceWithExpiration:2];
+        tcs = [BFTaskCompletionSource taskCompletionSourceWithExpiration:2];
     });
     
     it(@"it will expire", ^{
         [[BFTask taskWithDelay:3000] continueWithBlock: ^id (BFTask *task) {
-            [tsk trySetResult:@"result"];
+            [tcs trySetResult:@"result"];
             return nil;
         }];
         waitUntil ( ^(DoneCallback done) {
-            [tsk.task
+            [tcs.task
              continueWithBlock: ^id (BFTask *task) {
                  expect(task.cancelled).to.beFalsy();
                  expect(task.result).to.beNil();
                  expect(task.error.code).to.equal(kBFTimeoutError);
+                 expect(task.error.isTimeoutError).to.beTruthy();
                  expect(task.hasTimedOut).to.beTruthy();
                  done();
                  return nil;
@@ -47,11 +48,11 @@ describe(@"task completion", ^{
     
     it(@"will not expire", ^{
         [[BFTask taskWithDelay:1000] continueWithBlock: ^id (BFTask *task) {
-            [tsk trySetResult:@"result"];
+            [tcs trySetResult:@"result"];
             return nil;
         }];
         waitUntil ( ^(DoneCallback done) {
-            [tsk.task
+            [tcs.task
              continueWithBlock: ^id (BFTask *task) {
                  expect(task.cancelled).to.beFalsy();
                  expect(task.error).to.beNil();
@@ -62,6 +63,25 @@ describe(@"task completion", ^{
              }];
         });
     });
+    
+    
+    it(@"will not have timeout error", ^{
+        [[BFTask taskWithDelay:1000] continueWithBlock:^id _Nullable(BFTask * task) {
+            [tcs trySetError:[NSError errorWithDomain:@"aa" code:222 userInfo:nil]];
+            return nil;
+        }];
+        
+        waitUntil(^(DoneCallback done) {
+            [tcs.task continueWithBlock:^id _Nullable(BFTask * task) {
+                expect(task.error).to.beTruthy();
+                expect(task.error.isTimeoutError).to.beFalsy();
+                expect(task.hasTimedOut).to.beFalsy();
+                done();
+                return nil;
+            }];
+        });
+    });
+    
 });
 
 

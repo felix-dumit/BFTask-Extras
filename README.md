@@ -26,11 +26,11 @@ Create a BFTaskCompletionSource that expires after a set interval:
 
 ```objc
 
-BFTaskCompletionSource *tsk = [BFTaskCompletionSource taskCompletionSourceWithExpiration:1];
+BFTaskCompletionSource *tcs = [BFTaskCompletionSource taskCompletionSourceWithExpiration:1];
 
 [self someAsyncMethodWithCompletion:^(id result){
 	// need to use trySetResult here because it could have expired!
-	[tsk trySetResult:result];
+	[tcs trySetResult:result];
 }];
 
 ```
@@ -38,7 +38,7 @@ BFTaskCompletionSource *tsk = [BFTaskCompletionSource taskCompletionSourceWithEx
 Now if you continue the task it will either complete or be cancelled after the specified timeout:
 
 ```objc 
-[tsk.task continueWithBlock:^id(BFTask* task){
+[tcs.task continueWithBlock:^id(BFTask* task){
 	if(task.hasTimedOut){
 		//timed out
 	}

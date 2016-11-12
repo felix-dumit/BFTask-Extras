@@ -46,3 +46,15 @@ extern NSInteger const kBFTimeoutError;
 - (instancetype)setTimeout:(NSTimeInterval)timeout;
 
 @end
+
+
+@interface NSError (TimeoutError)
+
+/**
+ If the error represents a Bolts timeout error
+ */
+@property (readonly, nonatomic) BOOL isTimeoutError;
+
+@end
+
+
