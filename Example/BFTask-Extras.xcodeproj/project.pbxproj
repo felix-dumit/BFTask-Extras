@@ -23,6 +23,7 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		CBB43962732AD18293A1E968 /* Pods_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBECD75B125929F6620A27B2 /* Pods_Tests.framework */; };
 		D513D7611AD1F80D0039934B /* TaskResultTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D513D7601AD1F80D0039934B /* TaskResultTest.m */; };
+		D59DA6051DEF4FF0005CF101 /* TaskNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = D59DA6041DEF4FF0005CF101 /* TaskNotification.m */; };
 		D59EA1FC1B90EE3A00538F02 /* TaskDuringBlockTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D59EA1FB1B90EE3A00538F02 /* TaskDuringBlockTest.m */; };
 		D5BC09D31AD1FCC90014F85B /* TimeoutTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D5BC09D21AD1FCC90014F85B /* TimeoutTest.m */; };
 		D5BC09D51AD1FF430014F85B /* BFTaskImageViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = D5BC09D41AD1FF430014F85B /* BFTaskImageViewTest.m */; };
@@ -68,6 +69,7 @@
 		82D5F5D6641E172C6FE4431A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		C8A12B11C9467116F8C9B70E /* BFTask-Extras.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = "BFTask-Extras.podspec"; path = "../BFTask-Extras.podspec"; sourceTree = "<group>"; };
 		D513D7601AD1F80D0039934B /* TaskResultTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskResultTest.m; sourceTree = "<group>"; };
+		D59DA6041DEF4FF0005CF101 /* TaskNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskNotification.m; sourceTree = "<group>"; };
 		D59EA1FB1B90EE3A00538F02 /* TaskDuringBlockTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskDuringBlockTest.m; sourceTree = "<group>"; };
 		D5BC09D21AD1FCC90014F85B /* TimeoutTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeoutTest.m; sourceTree = "<group>"; };
 		D5BC09D41AD1FF430014F85B /* BFTaskImageViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFTaskImageViewTest.m; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				D5BC09D41AD1FF430014F85B /* BFTaskImageViewTest.m */,
 				D5BC09D61AD201D60014F85B /* RaceTest.m */,
 				D59EA1FB1B90EE3A00538F02 /* TaskDuringBlockTest.m */,
+				D59DA6041DEF4FF0005CF101 /* TaskNotification.m */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
 			);
 			path = Tests;
@@ -320,7 +323,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		25AB1B9C29AEC0CD8F0BDCA6 /* [CP] Copy Pods Resources */ = {
@@ -380,7 +383,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		DF972B75E4C8D93C7E701A76 /* [CP] Copy Pods Resources */ = {
@@ -416,6 +419,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D59EA1FC1B90EE3A00538F02 /* TaskDuringBlockTest.m in Sources */,
+				D59DA6051DEF4FF0005CF101 /* TaskNotification.m in Sources */,
 				D5BC09D71AD201D60014F85B /* RaceTest.m in Sources */,
 				D513D7611AD1F80D0039934B /* TaskResultTest.m in Sources */,
 				D5BC09D31AD1FCC90014F85B /* TimeoutTest.m in Sources */,
