@@ -73,7 +73,7 @@ describe(@"task completion", ^{
         
         waitUntil(^(DoneCallback done) {
             [tcs.task continueWithBlock:^id _Nullable(BFTask * task) {
-                expect(task.error).toNot.beNil();
+                expect(task.error).to.beTruthy();
                 expect(task.error.isTimeoutError).to.beFalsy();
                 expect(task.hasTimedOut).to.beFalsy();
                 done();
