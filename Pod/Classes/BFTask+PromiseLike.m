@@ -42,7 +42,7 @@
                                 if ([task isFaulted] || [task isCancelled]) {
                                     return task;
                                 } else {
-                                    return block(task.result ? : nil);
+                                    return block(task.result);
                                 }
                             }];
 }
@@ -60,7 +60,7 @@
 - (BFTask *)finallyWithExecutor:(BFExecutor *)executor withBlock:(BFPFinallyBlock)block {
     return [self continueWithExecutor:executor
                             withBlock: ^id (BFTask *task) {
-                                return block(task) ? : task;
+                                return block(task);
                             }];
 }
 
