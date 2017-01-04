@@ -29,7 +29,7 @@ describe(@"task completion", ^{
     
     it(@"it will expire", ^{
         [[BFTask taskWithDelay:3000] continueWithBlock: ^id (BFTask *task) {
-            [tcs trySetResult:@"result"];
+            [tcs trySetResult:@"result1"];
             return nil;
         }];
         waitUntil ( ^(DoneCallback done) {
@@ -47,8 +47,8 @@ describe(@"task completion", ^{
     });
     
     it(@"will not expire", ^{
-        [[BFTask taskWithDelay:1000] continueWithBlock: ^id (BFTask *task) {
-            [tcs trySetResult:@"result"];
+        [[BFTask taskWithDelay:500] continueWithBlock: ^id (BFTask *task) {
+            [tcs trySetResult:@"result2"];
             return nil;
         }];
         waitUntil ( ^(DoneCallback done) {
@@ -57,7 +57,7 @@ describe(@"task completion", ^{
                  expect(task.cancelled).to.beFalsy();
                  expect(task.error).to.beNil();
                  expect(task.hasTimedOut).to.beFalsy();
-                 expect(task.result).to.equal(@"result");
+                 expect(task.result).to.equal(@"result2");
                  done();
                  return nil;
              }];
@@ -66,14 +66,16 @@ describe(@"task completion", ^{
     
     
     it(@"will not have timeout error", ^{
-        [[BFTask taskWithDelay:1000] continueWithBlock:^id _Nullable(BFTask * task) {
-            [tcs trySetError:[NSError errorWithDomain:@"aa" code:222 userInfo:nil]];
+        NSError* error = [NSError errorWithDomain:@"aa" code:222 userInfo:nil];
+        [[BFTask taskWithDelay:100] continueWithBlock:^id _Nullable(BFTask * task) {
+            [tcs trySetError:error];
             return nil;
         }];
         
         waitUntil(^(DoneCallback done) {
             [tcs.task continueWithBlock:^id _Nullable(BFTask * task) {
-                expect(task.error).to.beTruthy();
+                expect(task.error).toNot.beNil();
+                expect(task.error).to.equal(error);
                 expect(task.error.isTimeoutError).to.beFalsy();
                 expect(task.hasTimedOut).to.beFalsy();
                 done();
@@ -90,7 +92,7 @@ describe(@"it will work with set timeout", ^{
     
     beforeEach ( ^{
         task = [[BFTask taskWithDelay:2000] continueWithBlock: ^id (BFTask *task) {
-            return @"result";
+            return @"result3";
         }];
     });
     
@@ -113,7 +115,7 @@ describe(@"it will work with set timeout", ^{
                 expect(task.cancelled).to.beFalsy();
                 expect(task.error).to.beFalsy();
                 expect(task.hasTimedOut).to.beFalsy();
-                expect(task.result).to.equal(@"result");
+                expect(task.result).to.equal(@"result3");
                 done();
                 return nil;
             }];
