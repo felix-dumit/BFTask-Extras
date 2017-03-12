@@ -11,6 +11,18 @@
 
 @implementation BFTaskCompletionSource (Task)
 
+-(BFTaskDefaultResultClosureType)defaultResultClosure {
+    return ^(id result, NSError* error) {
+        [self trySetError:error orResult:result];
+    };
+}
+
+-(BFTaskDefaultErrorClosureType)defaultErrorClosure {
+    return ^(NSError* error) {
+        [self trySetError:error orResult:nil];
+    };
+}
+
 - (void)setResultBasedOnTask:(BFTask *)taskk includingCancel:(BOOL)includeCancel {
     [taskk continueWithBlock: ^id (BFTask *task) {
         if (task.error) {

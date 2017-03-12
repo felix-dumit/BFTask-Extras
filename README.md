@@ -127,6 +127,33 @@ return t;
 }];
 ```
 
+##BFTaskCompletionSource Extras
+There is a helper function to set a result or error for a given task source in a single line, really useful for wrapping methods with completion blocks:
+```objc
+BFTaskCompletionSource* tcs = [BFTaskCompletionSource taskCompletionSource];
+[tcs setError:error orResult: result];
+```
+
+There is also a defaultClosure for wrapping methods that take a completion block with:
+
+- A single error parameter => `defaultErrorClosure`
+- A result (id) and an error parameter => `defaultResultClosure`.
+
+For example, instead of:
+```objc
+[self loadStringsAsync:^(NSString* result, NSError* error) {
+	if(error) { 
+		[tcs trySetError: error]; 
+	} else { 
+		[tcs trySetResult: result];
+	}
+}];
+```
+You can just do this:
+```objc
+[self loadStringsAsync:tcs.defaultResultClosure];
+```
+
 ## Usage
 
 To view an example of all these *tasks* working together, view the sample application.
