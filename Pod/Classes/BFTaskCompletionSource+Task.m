@@ -31,4 +31,20 @@
     [self setResultBasedOnTask:taskk includingCancel:YES];
 }
 
+-(void)setError:(NSError *)error orResult:(id)result {
+    if(error) {
+        [self setError:error];
+    } else {
+        [self setResult:result];
+    }
+}
+
+-(void)trySetError:(NSError *)error orResult:(id)result {
+    if(error) {
+        [self trySetError:error];
+    } else {
+        [self trySetResult:result];
+    }
+}
+
 @end
