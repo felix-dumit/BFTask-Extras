@@ -57,6 +57,13 @@ extern NSInteger const kBFTimeoutError;
  */
 - (instancetype)setTimeout:(NSTimeInterval)timeout;
 
+
+/**
+ 
+ @return a Task that is already timed out
+ */
++ (BFTask*)timedOutTask;
+
 @end
 
 

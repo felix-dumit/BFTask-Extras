@@ -57,6 +57,10 @@ NSInteger const kBFTimeoutError = 80175555;
     return [self.error isTimeoutError];
 }
 
++(BFTask *)timedOutTask {
+    return [BFTask taskWithError:[NSError boltsTimeoutError]];
+}
+
 @end
 
 
