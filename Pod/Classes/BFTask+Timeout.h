@@ -24,6 +24,18 @@ extern NSInteger const kBFTimeoutError;
  */
 + (instancetype)taskCompletionSourceWithExpiration:(NSTimeInterval)timeout;
 
+
+/**
+ Finishes the task with the timeout error
+ */
+- (void)setTimedOut;
+
+
+/**
+ Tries to finish the task with the timeout error
+ */
+- (void)trySetTimedOut;
+
 @end
 
 
