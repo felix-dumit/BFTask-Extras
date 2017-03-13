@@ -54,7 +54,7 @@ NSInteger const kBFTimeoutError = 80175555;
 }
 
 -(BOOL)hasTimedOut {
-    return [self.error.domain isEqualToString:BFTaskErrorDomain] && self.error.code == kBFTimeoutError;
+    return [self.error isTimeoutError];
 }
 
 @end
@@ -72,7 +72,8 @@ NSInteger const kBFTimeoutError = 80175555;
 @implementation NSError (TimeoutError)
 
 -(BOOL)isTimeoutError {
-    return [self isEqual:[NSError boltsTimeoutError]];
+    NSError* timeoutError = [NSError boltsTimeoutError];
+    return [self.domain isEqualToString:timeoutError.domain] && self.code == timeoutError.code;
 }
 
 @end
