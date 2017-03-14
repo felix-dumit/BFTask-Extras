@@ -13,6 +13,7 @@
 #import "BFTask+Result.h"
 #import "BFTask+Timeout.h"
 #import "BFTaskImageView.h"
+#import "NSNotificationCenter+Bolts.h"
 #import "BFTask+DuringBlock.h"
 #import "BFTaskCompletionSource+Task.h"
 #import "BFTask+PromiseLike.h"

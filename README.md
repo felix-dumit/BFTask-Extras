@@ -117,13 +117,12 @@ An easy way to return a task that executes during a given block. The block is ex
 PS: If you return an `NSError` or `NSException` from the block, the resulting task will fail. 
 You can also return a `BFTask`, in that case the resulting task will resolve based on the result of the returned task.
 
-## BFTask+Notification
+## NSNotificationCenter+Bolts
 An easy way to wait for a notification to be posted to notification center
 ```objc
-[[BFTask waitForNotificationNamed:UIApplicationDidEnterBackgroundNotification] continueWithSuccessBlock:^id _Nullable(BFTask<NSDictionary *> * _Nonnull t) {
-//t.result is userInfo of notification
-// this only listens to notification once then removes observer
-return t;
+[[[NSNotificationCenter defaultCenter] waitForNotificationNamed:UIApplicationDidEnterBackgroundNotification] continueWithSuccessBlock:^id _Nullable(BFTask<NSNotification *> * _Nonnull t) {
+    // this only listens to notification once then removes observer
+    return t;
 }];
 ```
 

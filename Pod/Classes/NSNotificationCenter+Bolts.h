@@ -8,17 +8,17 @@
 
 #import <Bolts/BFTask.h>
 
-@interface BFTask (Notification)
+@interface NSNotificationCenter (Bolts)
 
 /**
  Waits for NSNotification to post notification named
-
+ 
  @param notificationName notificationName name of the notification to be waited on
- @param object
+ @param object to observe the notification
  @return a task that completes when the notification is posted, the result contains the userInfo of the notification
  */
-+(BFTask*)waitForNotificationNamed:(NSString*)notificationName object:(id)object;
+-(BFTask*)waitForNotificationNamed:(NSString*)notificationName object:(id)object;
 
-+(BFTask<NSDictionary*>*)waitForNotificationNamed:(NSString*)notificationName;
+-(BFTask<NSNotification*>*)waitForNotificationNamed:(NSString*)notificationName;
 
 @end

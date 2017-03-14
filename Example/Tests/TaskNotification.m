@@ -8,24 +8,26 @@
 
 #import <Expecta/Expecta.h>
 #import <Specta/Specta.h>
-#import <BFTask_Extras/BFTask+Notification.h>
+#import <BFTask_Extras/NSNotificationCenter+Bolts.h>
 
 SpecBegin(TaskNotification)
 
 describe(@"wait for notification", ^{
+    NSNotificationCenter* notificationCenter = [NSNotificationCenter defaultCenter];
     NSString* notificationName = @"NAME_NOTIFICATION";
     NSDictionary* userInfo = @{@"temp": @123};
     it(@"should wait for notification to fire", ^{
         waitUntil(^(DoneCallback done) {
-            [[BFTask waitForNotificationNamed:notificationName] continueWithBlock:^id _Nullable(BFTask * _Nonnull t) {
-                expect(t.result).to.equal(userInfo);
+            [[notificationCenter waitForNotificationNamed:notificationName] continueWithBlock:^id _Nullable(BFTask<NSNotification *> * _Nonnull t) {
+                expect(t.result.userInfo).to.equal(userInfo);
+                expect(t.result.name).to.equal(notificationName);
                 expect(t.error).to.beNil();
                 expect(t.cancelled).to.beFalsy();
                 done();
                 return t;
             }];
             [[BFTask taskWithDelay:100] continueWithSuccessBlock:^id _Nullable(BFTask * _Nonnull t) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:nil userInfo:userInfo];
+                [notificationCenter postNotificationName:notificationName object:nil userInfo:userInfo];
                 return t;
             }];
         });
