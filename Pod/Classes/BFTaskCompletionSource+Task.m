@@ -11,13 +11,13 @@
 
 @implementation BFTaskCompletionSource (Task)
 
--(BFTaskDefaultResultClosureType)defaultResultClosure {
+-(void (^)(id,NSError*))defaultResultClosure {
     return ^(id result, NSError* error) {
         [self trySetError:error orResult:result];
     };
 }
 
--(BFTaskDefaultErrorClosureType)defaultErrorClosure {
+-(void (^)(NSError*))defaultErrorClosure {
     return ^(NSError* error) {
         [self trySetError:error orResult:nil];
     };
