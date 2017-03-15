@@ -1,6 +1,7 @@
 # BFTask-Extras
 
 [![CI Status](http://img.shields.io/travis/felix-dumit/BFTask-Extras.svg?style=flat)](https://travis-ci.org/felix-dumit/BFTask-Extras)
+[![BuddyBuild](https://dashboard.buddybuild.com/api/statusImage?appID=58c892d2a7550f0100515b9e&branch=master&build=latest)](https://dashboard.buddybuild.com/apps/58c892d2a7550f0100515b9e/build/latest?branch=master)
 [![Version](https://img.shields.io/cocoapods/v/BFTask-Extras.svg?style=flat)](http://cocoapods.org/pods/BFTask-Extras)
 [![License](https://img.shields.io/cocoapods/l/BFTask-Extras.svg?style=flat)](http://cocoapods.org/pods/BFTask-Extras)
 [![Platform](https://img.shields.io/cocoapods/p/BFTask-Extras.svg?style=flat)](http://cocoapods.org/pods/BFTask-Extras)
