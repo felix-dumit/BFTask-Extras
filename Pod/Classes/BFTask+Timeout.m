@@ -22,7 +22,7 @@ NSInteger const kBFTimeoutError = 80175555;
 @implementation BFTaskCompletionSource (Timeout)
 
 + (instancetype)taskCompletionSourceWithExpiration:(NSTimeInterval)timeout {
-    BFTaskCompletionSource *taskCompletion = [BFTaskCompletionSource taskCompletionSource];
+    BFTaskCompletionSource *taskCompletion = [self taskCompletionSource];
     [[BFTask taskWithDelay:timeout * 1000] continueWithBlock: ^id (BFTask *task) {
         [taskCompletion trySetTimedOut];
         return nil;
