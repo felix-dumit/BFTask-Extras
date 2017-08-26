@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef __nullable id(^BFResultBlock)(ResultType result, NSError *error);
 typedef __nullable id (^BFSuccessResultBlock)(ResultType result);
-typedef __nullable id (^BFTaskExecutionBlock)();
+typedef __nullable id (^BFTaskExecutionBlock)(void);
 typedef __nullable id (^BFErrorResultBlock)(NSError *error);
 typedef  BFTask * __nullable(^BFPFinallyBlock)(BFTask<ResultType> *task);
 
