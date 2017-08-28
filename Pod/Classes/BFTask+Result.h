@@ -13,14 +13,14 @@
 
 @interface BFTask (Result)
 
-- (instancetype)continueWithResultBlock:(BFResultBlock)block;
+- (instancetype)continueWithResultBlock:(BFResultBlock)block NS_SWIFT_NAME(continueWithResult(block:));
 
 - (instancetype)continueWithExecutor:(BFExecutor *)executor
-                     withResultBlock:(BFResultBlock)block;
+                     withResultBlock:(BFResultBlock)block NS_SWIFT_NAME(continueWithResult(executor:block:));
 
-- (instancetype)continueWithSuccessResultBlock:(BFSuccessResultBlock)block;
+- (instancetype)continueWithSuccessResultBlock:(BFSuccessResultBlock)block NS_SWIFT_NAME(continueWithSuccessResult(block:));
 
 - (instancetype)continueWithExecutor:(BFExecutor *)executor
-              withSuccessResultBlock:(BFSuccessResultBlock)block;
+              withSuccessResultBlock:(BFSuccessResultBlock)block NS_SWIFT_NAME(continueWithSuccessResult(executor:block:));
 
 @end
