@@ -9,6 +9,7 @@
 #import "BFTaskImageView.h"
 #import <Bolts/BFExecutor.h>
 
+#ifdef BFImageView
 @implementation BFTaskImageView
 
 - (instancetype)initWithTask:(BFTask *)task {
@@ -22,38 +23,23 @@
     return [BFTask taskWithResult:self.image];
 }
 
-#if TARGET_OS_IPHONE
 - (void)setTask:(BFTask *)task {
     [task continueWithExecutor:[BFExecutor mainThreadExecutor] withSuccessBlock: ^id (BFTask *imageTask) {
-        UIImage *img = nil;
-        if ([imageTask.result isKindOfClass:[UIImage class]]) {
-            img = (UIImage *)imageTask.result;
+        BFImage *img = nil;
+        if ([imageTask.result isKindOfClass:[BFImage class]]) {
+            img = (BFImage*)imageTask.result;
         }
         else if ([imageTask.result isKindOfClass:[NSData class]]) {
-            img = [UIImage imageWithData:imageTask.result];
+            img = [[BFImage alloc] initWithData:imageTask.result];
         }
         if (img) {
-            self.image = img;
+            [self setImage:img];
         }
         return img;
     }];
 }
-#else
-- (void)setTask:(BFTask *)task {
-    [task continueWithExecutor:[BFExecutor mainThreadExecutor] withSuccessBlock: ^id (BFTask *imageTask) {
-        NSImage *img = nil;
-        if ([imageTask.result isKindOfClass:[NSImage class]]) {
-            img = (NSImage *)imageTask.result;
-        }
-        else if ([imageTask.result isKindOfClass:[NSData class]]) {
-            img = [[NSImage alloc] initWithData: imageTask.result];
-        }
-        if (img) {
-            self.image = img;
-        }
-        return img;
-    }];
-}
-#endif
+
 @end
+#endif
+
 

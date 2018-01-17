@@ -8,18 +8,32 @@
 
 #import <Bolts/BFTask.h>
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_WATCH
+
+#undef BFImageView
+
+#elif TARGET_OS_IOS
+
 #import <UIKit/UIKit.h>
+#define BFImage UIImage
+#define BFImageView UIImageView
 
-@interface BFTaskImageView : UIImageView
-#else
+#elif TARGET_OS_MAC
+
 #import <Cocoa/Cocoa.h>
+#define BFImage NSImage
+#define BFImageView NSImageView
 
-@interface BFTaskImageView : NSImageView
 #endif
 
-@property (strong, nonatomic) BFTask *task;
 
-- (instancetype)initWithTask:(BFTask *)task;
+
+#ifdef BFImageView
+@interface BFTaskImageView: BFImageView
+
+@property (strong, nonatomic) BFTask<BFImage*> *task;
+
+- (instancetype)initWithTask:(BFTask<BFImage*> *)task;
 
 @end
+#endif

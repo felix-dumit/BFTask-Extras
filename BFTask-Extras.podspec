@@ -26,6 +26,7 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '7.0'
   s.osx.deployment_target = '10.10'
+  s.watchos.deployment_target = '2.0'
   s.requires_arc = true
   s.pod_target_xcconfig = { 'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES' }
 
